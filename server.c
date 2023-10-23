@@ -6,7 +6,7 @@
 /*   By: aarranz- <aarranz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 10:19:53 by aarranz-          #+#    #+#             */
-/*   Updated: 2023/10/17 11:43:15 by aarranz-         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:50:22 by aarranz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	handler(int sig, siginfo_t *info, void *ucontext)
 	static int	last_pid;
 	int			bit;
 
-	(void)ucontext;
+	ucontext = NULL;
 	if (last_pid != 0 && last_pid != info->si_pid)
 	{
 		i = 0;
@@ -61,11 +61,10 @@ int	main(void)
 	sa.sa_flags = 0;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-	write(1, "the pid :", 9);
+	write(1, "PID: ", 5);
 	ft_putnbr(getpid());
 	write(1, "\n", 1);
 	while (1)
-	{
 		pause();
-	}
+	return (0);
 }
